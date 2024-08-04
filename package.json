@@ -1,0 +1,15 @@
+{
+  "name": "pngtuberstuff",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "dev": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "electron": "^31.3.1",
+    "node-microphone": "^0.1.6"
+  }
+}
