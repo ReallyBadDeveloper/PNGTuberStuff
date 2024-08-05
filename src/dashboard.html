@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- <link rel="stylesheet" href="dashboard.css"> -->
+     <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            margin-top: 25px;
+            padding: 20px;
+            background: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #e0e0e0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #cccccc;
+        }
+
+        input[type="file"],
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            background-color: #2c2c2c;
+            color: #ffffff;
+        }
+
+        input[type="file"] {
+            padding: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #6200ea;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3700b3;
+        }
+     </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PNGTuber Settings</h1>
+        <form id="configForm">
+            <div class="form-group">
+                <label for="image">Upload Image:</label>
+                <input type="file" id="image" name="image">
+            </div>
+
+            <div class="form-group">
+                <label for="threshold">Mic Volume Threshold:</label>
+                <input type="number" id="threshold" name="threshold">
+            </div>
+
+            <h2>Custom States</h2>
+            <div class="form-group">
+                <label for="idleImage">Idle Image:</label>
+                <input type="file" id="idleImage" name="idleImage">
+            </div>
+            <div class="form-group">
+                <label for="talkingImage">Talking Image:</label>
+                <input type="file" id="talkingImage" name="talkingImage">
+            </div>
+            <div class="form-group">
+                <label for="yellingImage">Yelling Image:</label>
+                <input type="file" id="yellingImage" name="yellingImage">
+            </div>
+
+            <h2>Keybinds</h2>
+            <div class="form-group">
+                <label for="keybind1">Keybind 1:</label>
+                <input type="text" id="keybind1" name="keybind1">
+            </div>
+            <div class="form-group">
+                <label for="keybind2">Keybind 2:</label>
+                <input type="text" id="keybind2" name="keybind2">
+            </div>
+
+            <button type="submit">Save</button>
+        </form>
+
+        <h2>Presets</h2>
+        <div class="form-group">
+            <select id="presets"></select>
+            <button id="loadPreset">Load Preset</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('configForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.text())
+              .then(result => alert(result));
+
+            const config = {
+                threshold: document.getElementById('threshold').value,
+                idleImage: document.getElementById('idleImage').files[0]?.name,
+                talkingImage: document.getElementById('talkingImage').files[0]?.name,
+                yellingImage: document.getElementById('yellingImage').files[0]?.name,
+                keybind1: document.getElementById('keybind1').value,
+                keybind2: document.getElementById('keybind2').value
+            };
+
+            fetch('/config', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(config)
+            }).then(response => response.text())
+              .then(result => alert(result));
+        });
+
+        document.getElementById('loadPreset').addEventListener('click', function () {
+            const presetName = document.getElementById('presets').value;
+            fetch('/presets')
+                .then(response => response.json())
+                .then(presets => {
+                    const preset = presets.find(p => p.name === presetName);
+                    if (preset) {
+                        document.getElementById('threshold').value = preset.threshold;
+                        document.getElementById('idleImage').value = preset.idleImage;
+                        document.getElementById('talkingImage').value = preset.talkingImage;
+                        document.getElementById('yellingImage').value = preset.yellingImage;
+                        document.getElementById('keybind1').value = preset.keybind1;
+                        document.getElementById('keybind2').value = preset.keybind2;
+                    }
+                });
+        });
+
+        fetch('/presets')
+            .then(response => response.json())
+            .then(presets => {
+                const select = document.getElementById('presets');
+                presets.forEach(preset => {
+                    const option = document.createElement('option');
+                    option.value = preset.name;
+                    option.textContent = preset.name;
+                    select.appendChild(option);
+                });
+            });
+    </script>
+</body>
+</html>

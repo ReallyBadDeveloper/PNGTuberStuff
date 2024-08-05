@@ -1,0 +1,64 @@
+{
+  "presets": [
+    {
+      "threshold": "5",
+      "keybind1": "",
+      "keybind2": ""
+    },
+    {
+      "threshold": "20",
+      "keybind1": "",
+      "keybind2": ""
+    },
+    {
+      "threshold": "15",
+      "keybind1": "",
+      "keybind2": ""
+    },
+    {
+      "threshold": "15",
+      "keybind1": "",
+      "keybind2": ""
+    },
+    {
+      "threshold": "15",
+      "idleImage": "abstractpfp (7).png",
+      "talkingImage": "channels4_profile.jpg",
+      "yellingImage": "Screenshot 2023-11-08 135013(1).png",
+      "keybind1": "",
+      "keybind2": ""
+    },
+    {
+      "threshold": "15",
+      "idleImage": "abstractpfp (7).png",
+      "talkingImage": "channels4_profile.jpg",
+      "yellingImage": "Screenshot 2023-11-08 135013(1).png",
+      "keybind1": "",
+      "keybind2": ""
+    },
+    {
+      "threshold": "15",
+      "idleImage": "abstractpfp (7).png",
+      "talkingImage": "channels4_profile.jpg",
+      "yellingImage": "Screenshot 2023-11-08 135013(1).png",
+      "keybind1": "",
+      "keybind2": ""
+    },
+    {
+      "threshold": "20",
+      "idleImage": "abstractpfp (7).png",
+      "talkingImage": "channels4_profile.jpg",
+      "yellingImage": "Screenshot 2023-11-08 135013(1).png",
+      "keybind1": "",
+      "keybind2": ""
+    },
+    {
+      "threshold": "99",
+      "idleImage": "abstractpfp (7).png",
+      "talkingImage": "channels4_profile.jpg",
+      "yellingImage": "Screenshot 2023-11-08 135013(1).png",
+      "keybind1": "",
+      "keybind2": ""
+    }
+  ]
+}

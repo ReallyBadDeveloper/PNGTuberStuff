@@ -1,7 +1,7 @@
 {
   "name": "pngtuberstuff",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "dev": "electron ."
   },
@@ -10,6 +10,9 @@
   "description": "",
   "dependencies": {
     "electron": "^31.3.1",
-    "node-microphone": "^0.1.6"
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "node-microphone": "^0.1.6",
+    "pngtuberstuff": "file:"
   }
 }
